@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToasterConfig } from 'angular2-toaster';
 
+import 'style-loader!angular2-toaster/toaster.css';
 import {
   NbComponentStatus,
   NbGlobalLogicalPosition,
@@ -8,7 +9,6 @@ import {
   NbGlobalPosition,
   NbToastrService,
 } from '@nebular/theme';
-import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
   selector: 'ngx-toastr',
