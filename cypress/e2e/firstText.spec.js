@@ -2,7 +2,7 @@
 
 describe('First test suite', () => {
     beforeEach(() => {
-        if (!['Checkboxes'].includes(Cypress.currentTest.title)) {
+        if (!['Checkboxes', 'Datepicker'].includes(Cypress.currentTest.title)) {
             cy.visit('/');
             cy.contains('Forms').click();
             cy.contains('Form Layouts').click();
@@ -85,7 +85,7 @@ describe('First test suite', () => {
             });
     });
 
-    it.only('Checkboxes', () => {
+    it('Checkboxes', () => {
         cy.visit('/');
         cy.contains('Modal & Overlays').click();
         cy.contains('Toaster').click();
@@ -93,5 +93,43 @@ describe('First test suite', () => {
         cy.get('[type="checkbox"]').uncheck({ force: true });
         cy.get('[type="checkbox"]').eq(1).check({ force: true });
         cy.get('[type="checkbox"]').eq(0).click({ force: true });
+    });
+
+    it('Datepicker', () => {
+        function selectFutureDayFromNow(day) {
+            const date = new Date();
+            date.setDate(date.getDate() + day);
+            const futureDay = date.getDate();
+            const futureMonth = date.toLocaleString('en-US', { month: 'short' });
+            const futureYear = date.getFullYear();
+            const dateToAssert = `${futureMonth} ${futureDay}, ${futureYear}`;
+            cy.get('nb-calendar-navigation')
+                .invoke('attr', 'ng-reflect-date')
+                .then((dateAttribute) => {
+                    if (!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)) {
+                        cy.get('[data-name="chevron-right"]').click();
+                        selectFutureDayFromNow(day);
+                    } else {
+                        cy.get('.day-cell').not('.bounding-month').contains(futureDay).click();
+                    }
+                });
+            return dateToAssert;
+        }
+
+        cy.visit('/');
+        cy.contains('Forms').click();
+        cy.contains('Datepicker').click();
+
+        cy.get('[placeholder="Form Picker"]').click();
+        cy.get('nb-calendar-day-cell:not(.bounding-month)').eq(0).click();
+
+        cy.contains('nb-card', 'Common Datepicker')
+            .find('input')
+            .then((inputField) => {
+                cy.wrap(inputField).click();
+                const dateToAssert = selectFutureDayFromNow(100);
+                cy.wrap(inputField).invoke('prop', 'value').should('contain', dateToAssert);
+                cy.wrap(inputField).should('have.value', dateToAssert);
+            });
     });
 });
