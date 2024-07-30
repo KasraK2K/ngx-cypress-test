@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ToasterConfig } from 'angular2-toaster';
 
-import 'style-loader!angular2-toaster/toaster.css';
 import {
   NbComponentStatus,
   NbGlobalLogicalPosition,
@@ -9,6 +8,7 @@ import {
   NbGlobalPosition,
   NbToastrService,
 } from '@nebular/theme';
+import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
   selector: 'ngx-toastr',
@@ -52,7 +52,7 @@ export class ToastrComponent {
   quotes = [
     { title: null, body: 'We rock at Angular' },
     { title: null, body: 'Titles are not always needed' },
-    { title: null, body: 'Toastr rock!' },
+    { title: null, body: 'Toaster rock!' },
   ];
 
   makeToast() {
