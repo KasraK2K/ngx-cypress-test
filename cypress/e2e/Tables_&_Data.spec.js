@@ -37,7 +37,7 @@ describe('Tables & Data test suite', () => {
                 });
         });
 
-        it.only('should filter rows by age', () => {
+        it('should filter rows by age', () => {
             const ages = ['20', '30', '40', '200'];
             cy.wrap(ages).each((age) => {
                 cy.get('thead [placeholder="Age"]').clear().type(age);
