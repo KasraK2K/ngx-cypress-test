@@ -5,7 +5,6 @@ import { navigateTo } from '../support/page_objects/navigationPage';
 describe('Tables & Data test suite', () => {
   describe('Smart Table', () => {
     beforeEach(() => {
-      cy.visit('/');
       navigateTo.tableData();
     });
 

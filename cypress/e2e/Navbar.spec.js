@@ -2,8 +2,6 @@
 
 describe('Navbar test suite', () => {
   it('Lists and dropdowns', () => {
-    cy.visit('/');
-
     // 1
     cy.get('nav nb-select').click();
     cy.get('ul.options-list').contains('Dark').click();

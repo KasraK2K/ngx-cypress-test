@@ -5,7 +5,6 @@ import { navigateTo } from '../support/page_objects/navigationPage';
 describe('Forms test suite', () => {
   describe('Form Layouts', () => {
     beforeEach(() => {
-      cy.visit('/');
       navigateTo.forms();
     });
 

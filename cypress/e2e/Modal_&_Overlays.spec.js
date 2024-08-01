@@ -5,7 +5,6 @@ import { navigateTo } from '../support/page_objects/navigationPage';
 describe('Modal & Overlays test suite', () => {
   describe('Toaster', () => {
     beforeEach(() => {
-      cy.visit('/');
       navigateTo.modalOverlays();
     });
 

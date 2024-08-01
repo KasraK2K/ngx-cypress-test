@@ -13,7 +13,7 @@ function selectGroupMenuItem(groupName) {
 
 class NavigationPage {
   forms() {
-    selectGroupMenuItem('FormForms');
+    selectGroupMenuItem('Forms');
     cy.contains('Form Layouts').click();
   }
 
